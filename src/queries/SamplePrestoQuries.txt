@@ -1,0 +1,288 @@
+select * from EDAPADLSDEVNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V
+where flnacustom1_.chain_lvl1_node_nbr ='010774'
+
+
+
+select * from EDAPADLSDEVNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1_
+where flnacustom1_.chain_lvl1_node_nbr ='010774'
+and flnacustom1_ .geo_lvl2_node_nbr='008'
+
+
+Region wise-
+select * from EDAPADLSDEVNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1_where flnacustom1_.chain_lvl1_node_nbr ='010774'and 
+flnacustom1_ .geo_lvl2_node_nbr='008'
+
+select * from 
+edapadlsprdna_hive.sem_pfna_gtm.prmy_cust_subj_area_v flnacustom1_
+--EDAPADLSDEVNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1
+where flnacustom1_.chain_lvl1_node_nbr ='010774'and 
+flnacustom1_ .geo_lvl2_node_nbr='008'
+
+
+
+Zone wise-
+
+select distinct
+flnacustom1_.geo_lvl3_node_nbr ,
+flnacustom1_.geo_lvl3_node_nm
+from EDAPADLSPRDNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1_
+where flnacustom1_.chain_lvl1_node_nbr ='010774'
+and flnacustom1_.geo_lvl2_node_nbr='008'
+
+
+
+SQL Query for Region:
+
+select distinct flnacustom1_.geo_lvl2_node_nm
+from EDAPADLSPRDNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1_
+where flnacustom1_.chain_lvl1_node_nbr ='010774'
+
+
+
+
+
+
+
+
+select
+    ltrim(rtrim(flnacustom1_.geo_lvl2_node_nm)) as col_0_0_,
+    flnacustom1_.geo_lvl2_node_nbr as col_1_0_,
+    ltrim(rtrim(flnacustom1_.geo_lvl3_node_nm)) as col_2_0_,
+    flnacustom1_.geo_lvl3_node_nbr as col_3_0_,
+    sum(salestopla0_.sls_plan_amt) as col_4_0_,
+    sum(salestopla0_.unslbl_plan_amt) as col_5_0_
+from
+    EDAPADLSPRDNA_HIVE.sem_pfna_gtm.flna_cust_sls_plan_wkly_v salestopla0_
+inner join EDAPADLSPRDNA_HIVE.sem_pfna_gtm.PRMY_CUST_SUBJ_AREA_V flnacustom1_
+on
+    (salestopla0_.cust_id = flnacustom1_.prmy_cust_nbr)
+where
+    flnacustom1_.chain_lvl1_node_nbr = '010774'
+    and
+flnacustom1_.ctry_code = salestopla0_.ctry_cdv
+    and flnacustom1_.co_code = salestopla0_.co_cdv
+    and
+salestopla0_.yr_num ='2022'
+    and salestopla0_.ctry_cdv ='157'
+    and (coalesce(null,
+    '008') is null
+        or flnacustom1_.geo_lvl2_node_nbr ='008')
+    and (coalesce(null,
+    null) is null
+        or flnacustom1_.geo_lvl3_node_nbr =null)
+    and salestopla0_.cust_id = flnacustom1_.prmy_cust_nbr
+group by
+    flnacustom1_.geo_lvl2_node_nm ,
+    flnacustom1_.geo_lvl2_node_nbr ,
+    flnacustom1_.geo_lvl3_node_nm ,
+    flnacustom1_.geo_lvl3_node_nbr
+order by
+    flnacustom1_.geo_lvl2_node_nm
+
+
+
+
+
+**********************
+
+
+select saleableun0_.CY_PY as col_0_0_, sum(saleableun0_.VALUE) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.SALEABLES_UNSALEABLES_TMFRM_V saleableun0_
+ where (saleableun0_.PRMY_CUST_NBR in (select distinct (prmy_cust_nbr) from EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V where chain_lvl1_node_nbr ='010774' 
+ and ctry_code ='157' and geo_lvl2_node_nbr in ('002'))) and saleableun0_.MEASURE_TYPE='SALES' and saleableun0_.CTRY_CODE='157' group by saleableun0_.CY_PY;
+
+
+select saleableun0_.CY_PY as col_0_0_, sum(saleableun0_.VALUE) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.SALEABLES_UNSALEABLES_TMFRM_V saleableun0_
+ where (saleableun0_.PRMY_CUST_NBR in (select distinct (prmy_cust_nbr) from EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V where chain_lvl1_node_nbr ='010774' and ctry_code ='157' 
+and geo_lvl3_node_nbr in ('025'))) and saleableun0_.MEASURE_TYPE='SALES' and saleableun0_.CTRY_CODE='157' group by saleableun0_.CY_PY;
+
+
+select saleableun0_.CY_PY as col_0_0_, sum(saleableun0_.VALUE) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.SALEABLES_UNSALEABLES_TMFRM_V saleableun0_
+ where (saleableun0_.PRMY_CUST_NBR in (select distinct (prmy_cust_nbr) from EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V where chain_lvl1_node_nbr ='010774' 
+ and ctry_code ='157' and geo_lvl2_node_nbr in ('002')
+union
+select distinct (prmy_cust_nbr) from EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V where chain_lvl1_node_nbr ='010774' and ctry_code ='157' 
+and geo_lvl3_node_nbr in ('025'))) and saleableun0_.MEASURE_TYPE='SALES' and saleableun0_.CTRY_CODE='157' group by saleableun0_.CY_PY;
+
+
+
+
+***************
+
+saleslydetails-
+
+
+ select
+    saleableun0_.CY_PY as col_0_0_,
+    sum(saleableun0_.VALUE) as col_1_0_,
+    flnacustom1_.geo_lvl2_node_nbr as col_2_0_,
+    flnacustom1_.geo_lvl2_node_nm as col_3_0_
+from
+     EDAPADLSDEVNA_HIVE.SEM_PFNA_GTM.SALEABLES_UNSALEABLES_TMFRM_V saleableun0_
+inner join EDAPADLSDEVNA_HIVE.SEM_PFNA_GTM.PRMY_CUST_SUBJ_AREA_V flnacustom1_
+on flnacustom1_.prmy_cust_nbr = saleableun0_.PRMY_CUST_NBR
+where
+    flnacustom1_.chain_lvl1_node_nbr ='010774'
+    and saleableun0_.MEASURE_TYPE ='SALES'
+    and saleableun0_.CTRY_CODE ='157'
+    and saleableun0_.CY_PY ='CY'
+    and saleableun0_.TIME_FRAME ='YTD'
+group by
+    saleableun0_.CY_PY ,
+    flnacustom1_.geo_lvl2_node_nbr ,
+    flnacustom1_.geo_lvl2_node_nm
+
+
+
+
+select
+saleableun0_.CY_PY as col_0_0_,
+sum(saleableun0_.VALUE) as col_1_0_
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_GTM.SALEABLES_UNSALEABLES_TMFRM_V 
+saleableun0_
+where
+(saleableun0_.PRMY_CUST_NBR in 
+(
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl2_node_nbr in ('002')))
+and saleableun0_.MEASURE_TYPE = 'SALES'
+and saleableun0_.CY_PY = 'CY'
+and saleableun0_.CTRY_CODE = '157'
+and 
+saleableun0_.TIME_FRAME = 'YTD'
+group by
+saleableun0_.CY_PY;
+ 
+
+
+select
+saleableun0_.CY_PY as col_0_0_,
+sum(saleableun0_.VALUE) as col_1_0_
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_GTM.SALEABLES_UNSALEABLES_TMFRM_V 
+saleableun0_
+where
+(saleableun0_.PRMY_CUST_NBR in 
+(
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl3_node_nbr in ('025')))
+and saleableun0_.MEASURE_TYPE = 'SALES'
+and saleableun0_.CY_PY = 'CY'
+and saleableun0_.CTRY_CODE = '157'
+and 
+saleableun0_.TIME_FRAME = 'YTD'
+group by
+saleableun0_.CY_PY;
+
+
+
+
+
+select
+saleableun0_.CY_PY as col_0_0_,
+sum(saleableun0_.VALUE) as col_1_0_
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_GTM.SALEABLES_UNSALEABLES_TMFRM_V 
+saleableun0_
+where
+(saleableun0_.PRMY_CUST_NBR in 
+(
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl2_node_nbr in ('002')
+union
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl3_node_nbr in ('025')))
+and saleableun0_.MEASURE_TYPE = 'SALES'
+and saleableun0_.CY_PY = 'CY'
+and saleableun0_.CTRY_CODE = '157'
+and 
+saleableun0_.TIME_FRAME = 'YTD'
+group by
+saleableun0_.CY_PY;
+
+
+select sum(salestopla0_.sls_plan_amt) as col_0_0_, sum(salestopla0_.unslbl_plan_amt) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.sem_pfna_gtm.flna_cust_sls_plan_wkly_v salestopla0_ where 
+(salestopla0_.cust_id in (
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl2_node_nbr in ('002'))) and salestopla0_.yr_num='2022' and salestopla0_.co_cdv='001' and
+ salestopla0_.ctry_cdv='157'
+
+
+
+
+select sum(salestopla0_.sls_plan_amt) as col_0_0_, sum(salestopla0_.unslbl_plan_amt) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.sem_pfna_gtm.flna_cust_sls_plan_wkly_v salestopla0_ where 
+(salestopla0_.cust_id in (
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl3_node_nbr in ('025'))) and salestopla0_.yr_num='2022' and salestopla0_.co_cdv='001' and
+ salestopla0_.ctry_cdv='157'
+
+
+
+select sum(salestopla0_.sls_plan_amt) as col_0_0_, sum(salestopla0_.unslbl_plan_amt) as col_1_0_ from 
+EDAPADLSDEVNA_HIVE.sem_pfna_gtm.flna_cust_sls_plan_wkly_v salestopla0_ where 
+(salestopla0_.cust_id in (
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl2_node_nbr in ('002')
+union
+select
+distinct (prmy_cust_nbr)
+from
+EDAPADLSDEVNA_HIVE.SEM_PFNA_RETAIL360.PRMY_CUST_SUBJ_AREA_V
+where
+chain_lvl1_node_nbr = '010774'
+and ctry_code = '157'
+and geo_lvl3_node_nbr in ('025'))) and salestopla0_.yr_num='2022' and salestopla0_.co_cdv='001' and
+ salestopla0_.ctry_cdv='157'
+
+
+
+
+
+
